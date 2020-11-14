@@ -1,7 +1,1139 @@
 ---
 id: code
-title: 文思开发规范
-sidebar_label: 编程规带
+title: 文思海辉 -- 前端开发规范
+sidebar_label: 前端开发规范
 ---
 
-开发规范
+> 规范的目的是为了编写高质量的代码，让团队成员每天得心情都是愉悦的，大家在一起是快乐的。
+
+## 一、编程规约
+
+### 1、命名规范
+
+### 1.1命名分类
+
+```js
+camelCase （驼峰式，也叫小驼峰命名， e.g. userInfo ）
+
+PascalCase （帕斯卡命名式，也叫大驼峰命名， e.g. UserInfo ）
+
+kebab-case （短横线连接式， e.g. user-info ）
+
+snake_case （下划线连接式， e.g. user_info ）
+```
+
+### 1.2 项目命名
+
+```js
+全部采用小写方式， 以中划线分隔。
+
+正确示例：eam-web-pc
+
+错误示例：eam_web_pc / eamWebPc
+```
+
+### 1.3 目录命名
+
+全部采用小写方式， 以中划线分隔，有复数结构时，要采用复数命名法， 缩写不用复数
+
+| 正确示例     | 错误示例     | 说明         |
+|--------------|--------------|--------------|
+| components   | Components   | 业务通用组件 |
+| images       | Images       | 图片库       |
+| utils        | Utils        | 工具库       |
+| demo-styles  | Demo_styles  | 示例样式     |
+| demo-scripts | Demo_scripts | 示例脚本     |
+
+【特殊】组件目录使用 PascalCase ，其他目录统一使用 kebab-case 风格
+
+```js
+正确示例： head-search / page-loading / authorized / notice-icon
+
+错误示例： HeadSearch / PageLoading
+```
+
+### 1.4 JS、CSS、SCSS、HTML、PNG 文件命名
+
+全部采用小写方式， 以中划线分隔
+
+```
+正确示例： render-dom.js / signup.css / index.html / company-logo.png
+
+错误示例： renderDom.js / UserManagement.html
+```
+
+### 1.5 命名严谨性
+
+代码中的命名严禁使用拼音与英文混合的方式，更不允许直接使用中文的方式。
+说明：正确的英文拼写和语法可以让阅读者易于理解，避免歧义。注意，即使纯拼音命名方式也要避免采用
+
+```
+正确示例：henan / luoyang / rmb 等国际通用的名称，可视同英文。
+
+错误示例：DaZhePromotion [打折] / getPingfenByName() [评分] / int 年龄 = 22
+```
+
+杜绝完全不规范的缩写，避免望文不知义：
+
+错误示例：AbstractClass“缩写”命名成 AbsClass；condition“缩写”命名成condi，此类随意缩写严重降低了代码的可阅读性。
+
+### 2、HTML 规范 （Vue Template 同样适用）
+
+### 2.1 HTML 类型
+
+推荐使用 HTML5 的文档类型申明： .
+
+（建议使用 text/html 格式的 HTML。避免使用 XHTML。XHTML 以及它的属性，比如
+application/xhtml+xml 在浏览器中的应用支持与优化空间都十分限）。
+
+-   规定字符编码
+
+-   IE 兼容模式
+
+-   规定字符编码
+
+-   doctype 大写
+
+正确示例：
+
+```html
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+
+<meta charset="UTF-8" />
+
+<title>Page title</title>
+
+</head>
+
+<body>
+
+<img src="images/company-logo.png" alt="Company" />
+
+</body>
+
+</html>
+```
+
+### 2.2 缩进
+
+-   缩进使用 2 个空格（一个 tab）
+
+-   嵌套的节点应该缩进。
+
+### 2.3 分块注释
+
+在每一个块状元素，列表元素和表格元素后，加上一对 HTML 注释。注释格式
+
+### 2.4 语义化标签
+
+HTML5 中新增很多语义化标签，所以优先使用语义化标签，避免一个页面都是 div 或者 p标签
+
+```html
+正确示例
+
+<header></header>
+
+<footer></footer>
+
+错误示例
+
+<div>
+
+<p></p>
+
+</div>
+```
+
+
+
+### 3、CSS 规范
+
+### 3.1 命名
+
+-   类名使用小写字母，以中划线分隔
+
+-   id 采用驼峰式命名
+
+-   less 中的变量、函数、混合、placeholder 采用驼峰式命名
+
+ID 和 class的名称总是使用可以反应元素目的和用途的名称，或其他通用的名称，代替表象和晦涩难懂的名称。
+
+```css
+不推荐：
+
+.fw-800 {
+
+font-weight: 800;
+
+}
+
+.red {
+
+color: red;
+
+}
+
+推荐:
+
+.heavy {
+
+font-weight: 800;
+
+}
+
+.important {
+
+color: red;
+
+}
+```
+
+
+
+### 3.2 选择器
+
+1) css 选择器中避免使用标签名
+
+从结构、表现、行为分离的原则来看，应该尽量避免 css 中出现 HTML 标签，并且在 css
+选择器中出现标签名会存在潜在的问题。
+
+2) 很多前端开发人员写选择器链的时候不使用直接子选择器（注：直接子选择器和后代选择器的区别）。有时，这可能会导致疼痛的设计问题并且有时候可能会很耗性能。然而，在任何情况下，这是一个非常不好的做法。如果你不写很通用的，需要匹配到
+DOM 末端的选择器， 你应该总是考虑直接子选择器。
+
+```css
+不推荐:
+
+.content .title {
+
+font-size: 2rem;
+
+}
+
+推荐:
+
+.content > .title {
+
+font-size: 2rem;
+
+}
+```
+
+### 3.3 尽量使用缩写属性
+
+```css
+不推荐：
+
+border-top-style: none;
+
+font-family: palatino, georgia, serif;
+
+font-size: 100%;
+
+line-height: 1.6;
+
+padding-bottom: 2em;
+
+padding-left: 1em;
+
+padding-right: 1em;
+
+padding-top: 0;
+
+推荐：
+
+border-top: 0;
+
+font: 100%/1.6 palatino, georgia, serif;
+
+padding: 0 1em 2em;
+```
+
+
+
+### 3.4 每个选择器及属性独占一行
+
+```css
+/*不推荐：*/
+button{
+width:100px;height:50px;color:#fff;background:#00a0e9;
+}
+
+/*推荐：*/
+button{
+width:100px;
+height:50px;
+color:#fff;
+background:#00a0e9;
+}
+```
+
+
+
+### 3.5 省略0后面的单位
+
+```css
+/*不推荐：*/
+div{
+padding-bottom: 0px;
+margin: 0em;
+}
+
+/*推荐：*/
+div{
+padding-bottom: 0;
+margin: 0;
+}
+```
+
+
+
+### 3.6 避免使用ID选择器及全局标签选择器防止污染全局样式
+
+```css
+/*不推荐：*/
+#header{
+padding-bottom: 0px;
+margin: 0em;
+}
+
+/*推荐：*/
+.header{
+padding-bottom: 0px;
+margin: 0em;
+}
+```
+
+
+
+### 4、LESS 规范
+
+### 4.1 代码组织
+
+1)将公共less文件放置在style/less/common文件夹
+
+```
+例:// color.less,common.less
+```
+
+2)按以下顺序组织
+
+1、`@import;`
+
+2、变量声明;
+
+3、样式声明;
+
+```less
+@import "mixins/size.less";
+@default-text-color: #333;
+
+.page {
+width: 960px;
+margin: 0 auto;
+}
+```
+
+### 4.2 避免嵌套层级过多
+
+将嵌套深度限制在3级。对于超过4级的嵌套，给予重新评估。这可以避免出现过于详实的CSS选择器。
+
+避免大量的嵌套规则。当可读性受到影响时，将之打断。推荐避免出现多于20行的嵌套规则出现
+
+```less
+/*不推荐：*/
+.main{
+    .title{
+        .name{
+        color:#fff
+        }
+    }
+}
+
+/*推荐：*/
+.main-title{
+    .name{
+    	color:#fff
+    }
+}
+```
+
+
+
+### 5、Javascript 规范
+
+### 5.1 命名
+
+1) 变量采用驼峰式命名 camelCase 常量使用全大写，用Class采用 PascalCase
+
+正确示例：
+
+```js
+let thisIsMyName; const MAX_COUNT = 10;
+
+Class Person { }
+```
+
+2）变量声明一个函数作用域中所有的变量声明尽量提到函数首部。优先使用块级变量 let 和 const ，如无需修改的常量使用 const
+
+3) 方法名、参数名、成员变量、局部变量都统一使用 lowerCamelCase风格，必须遵从驼峰形式。
+
+```js
+正确示例： localValue / getHttpMessage() / inputUserId
+
+其中 method 方法命名必须是 动词 或者 动词+名词 形式
+
+正确示例：saveShopCarData /openShopCarInfoDialog
+
+错误示例：save / open / show / go
+```
+
+特此说明，增删查改，详情统一使用如下 5个单词，不得使用其他（目的是为了统一各个端）
+
+```
+add / update / delete / detail / get
+```
+
+> 文末有函数方法常用的动词
+
+4) 常量命名全部大写，单词间用下划线隔开，力求语义表达完整清楚，不要嫌名字长。
+
+```js
+正确示例： MAX_STOCK_COUNT
+
+错误示例： MAX_COUNT
+```
+
+### 5.2 注释
+
+1）单行注释
+
+-   注释单独一行的情况下，注释的//后面要跟一个空格
+
+-   注释如果和代码同一行，代码分号结束后，要跟一个空格，注释的//后也要跟一个空格
+
+```js
+// 调用函数
+Foo()
+Let maxCount = 10; // 这是一个变量
+```
+
+2）多行注释
+
+>   多行注释使用下面这种形式：
+
+```js
+/
+* requestProcessNameQuery  //流程列表
+* @param {*} params 
+* 
+*/
+```
+
+>   多行注释建议在以下几种情况使用：
+
+-   难于理解的代码段
+
+-   可能存在错误的代码段业务逻辑强相关的代码函数注释
+
+-   复杂的函数，所有类，都必须进行函数注释，函数注释使用业界统一的规范，方便后续使用
+    jsdoc 生成文档。最好配置VSCode自动生成模板
+
+3）必要注释
+
+-   公共组件使用说明
+
+-   api 目录的接口 js 文件必须加注释
+
+-   store 中的 state, mutation, action 等必须加注释
+
+-   vue 文件中的 template 必须加注释，若文件较大添加 start end 注释
+
+-   vue 文件的 methods，每个 method 必须添加注释
+
+-   vue 文件的 data, 非常见单词要加注释
+
+### 5.3 代码格式
+
+1) 使用 2 个空格进行缩进
+
+```js
+//正确示例：
+
+if (x < y) {
+    x += 10;
+} else {
+    x += 1;
+}
+```
+
+2）单行长度单行长度不得超过 100，超过部分需要换行
+
+3）统一加分号
+
+4）空格
+
+-   三元运算符'?:'前后逗号后必须要有空格
+
+-   代码块 '{' 前下列关键字前：else, while, catch, finally 下列关键字后：if,else, for, while, do, switch, case, try,catch, finally, with, return, typeof
+    
+-   单行注释'//'后（若单行注释和代码同行，则'//'前也需要），
+
+-   多行注释'\*'后 对象的属性值前
+
+-   for循环，分号后留有一个空格，前置条件如果有多个，逗号后留一个空格无论是函数声明还是函数表达式，
+    
+-   '{'前一定要有空格
+
+-   函数的参数之间
+
+5）空行
+
+-   变量声明后（当变量声明在代码块的最后一行时，则无需空行）
+
+-   注释前（当注释在代码块的第一行时，则无需空行）
+
+-   定义函数前
+
+-   文件最后保留一个空行
+
+6) 不同逻辑、不同语义、不同业务的代码之间插入一个空行分隔开来以提升可读性。
+
+说明：任何情形，没有必要插入多个空行进行隔开。
+
+### 5.4 对象声明
+
+1) 使用字面值创建对象
+
+```js
+正确示例： let user = {};
+
+错误示例： let user = new Object();
+```
+
+2) 使用字面量来代替对象构造器
+
+```js
+// 正确示例：
+var user = {
+    age: 0,
+    name: 1,
+    city: 3
+};
+
+// 错误示例：
+var user = new Object();
+user.age = 0;
+user.name = 0;
+user.city = 0;
+```
+
+
+
+### 5.5 使用 ES6,7
+
+必须优先使用 ES6,7中新增的语法糖和函数。这将简化你的程序，并让你的代码更加灵活和可复用。
+
+必须强制使用 ES6, ES7 的新语法，比如箭头函数、await/async ， 解构， let ，for…of 等等
+
+### 5.6 括号
+
+下列关键字后必须有大括号（即使代码块的内容只有一行）：if, else, for, while, do,switch, try, catch, finally, with。
+
+```js
+// 正确示例：
+
+if (condition) {
+	doSomething();
+}
+
+// 错误示例：
+if (condition) doSomething();
+```
+
+
+
+### 5.7 undefined 判断
+
+永远不要直接使用 undefined 进行变量判断；使用 typeof和字符串’undefined’对变量进行判断。
+
+```js
+// 正确示例：
+if (typeof person === 'undefined') {
+...
+}
+
+// 错误示例：
+if (person === undefined) {
+...
+}
+```
+
+
+
+### 5.8 条件判断和循环最多三层
+
+条件判断能使用三目运算符和逻辑运算符解决的，就不要使用条件判断，但是谨记不要写太长的三目运算符。如果超过3 层请抽成函数，并写清楚注释。
+
+```js
+// 正确示例
+company === patera ? ‘Yes’ : ‘No’
+
+id && this.fetchData()
+
+// 错误示例
+item.sharedStatus === 0 ? '10px solid #fff' : item.sharedStatus === 1 ? '10px solid #e3effa' : item.sharedStatus === 2 ? '10px solid #f9f0ee' : item.sharedStatus === 3 ? '10px solid #eaf6df' : ''
+```
+
+
+
+### 二、Vue 规范
+
+### 1、Vue 编码基础
+
+### 1.1. 组件规范
+
+1) 组件名为多个单词。
+
+组件名应该始终是多个单词组成（大于等于 2），且命名规范为KebabCase格式。
+
+这样做可以避免跟现有的以及未来的 HTML 元素相冲突，因为所有的 HTML元素名称都是单个单词的。
+
+```js
+// 正确示例：
+
+export default {
+	name: 'TodoItem'
+	// ...
+};
+
+// 错误示例：
+
+export default {
+	name: 'Todo',
+	// ...
+}
+
+export default {
+	name: 'todo-item',
+	// ...
+}
+```
+
+
+
+2) 和父组件紧密耦合的子组件应该以父组件名作为前缀命名
+
+```
+正确示例：
+
+components/
+|- todo-list.vue
+|- todo-list-item.vue
+|- todo-list-item-button.vue
+|- user-profile-options.vue （完整单词）
+
+错误示例：
+
+components/
+|- TodoList.vue
+|- TodoItem.vue
+|- TodoButton.vue
+|- UProfOpts.vue （使用了缩写）
+```
+
+
+
+3) 在 Template 模版中使用组件，应使用 PascalCase 模式，并且使用自闭合组件。
+
+```
+正确示例：
+
+<!-- 在单文件组件、字符串模板和 JSX 中 -->
+
+<MyComponent />
+
+<Row><table :column="data"/></Row>
+
+错误示例：
+
+<my-component /> <row><table :column="data" /></row>
+```
+
+
+
+4) Prop 定义应该尽量详细
+
+-   必须使用 camelCase 驼峰命名
+
+-   必须指定类型
+
+-   必须加上注释，表明其含义
+
+-   必须加上 required 或者 default，两者二选其一
+
+-   如果有业务需要，必须加上 validator 验证
+
+```js
+// 正确示例：
+props: {
+    // 组件状态，用于控制组件的颜色
+    status: {
+        type: String,
+        required: true,
+        validator: function (value) {
+            return ['succ','info','error'].indexOf(value) !== -1
+        }
+    },
+    // 用户级别，用于显示皇冠个数
+    userLevel: {
+        type: String,
+        required: true
+    },
+},
+```
+
+
+
+5) 为组件样式设置作用域
+
+```html
+正确示例：
+
+<template>
+<button class="btn btn-close">X</button>
+</template>
+<!-- 使用 `scoped` 特性 -->
+<style scoped>
+.btn-close {
+background-color: red;
+}
+</style>
+
+错误示例：
+
+<template>
+<button class="btn btn-close">X</button>
+</template>
+
+<!-- 没有使用 `scoped` 特性 -->
+
+<style>
+.btn-close {
+background-color: red;
+}
+</style>
+```
+
+### 1.2. 模板中使用简单的表达式
+
+组件模板应该只包含简单的表达式，复杂的表达式则应该重构为计算属性或方法。复杂表达式会让你的模板变得不那么声明式。我们应该尽量描述应该出现的是什么，而非如何计算那个值。而且计算属性和方法使得代码可以重用。
+
+```vue
+正确示例：
+
+<template>
+<p>{{ normalizedFullName }}</p>
+</template>
+
+// 复杂表达式已经移入一个计算属性
+computed: {
+	normalizedFullName: function () {
+		return this.fullName.split(' ').map(function (word) {
+			return word[0].toUpperCase() + word.slice(1)
+		}).join(' ')
+	}
+}
+
+错误示例：
+
+<template>
+<p>
+{{fullName.split(' ').map(function (word) {return word[0].toUpperCase() + word.slice(1)
+}).join(' ')}}
+</p>
+</template>
+```
+
+### 1.3 指令都使用缩写形式
+
+指令推荐都使用缩写形式，(用 : 表示 v-bind: 、用 \@ 表示 v-on: 和用 \# 表示v-slot:)
+
+```html
+正确示例：
+
+<input @input="onInput"  @focus="onFocus" >
+
+错误示例：
+
+<input v-on:input="onInput" @focus="onFocus">
+```
+
+### 1.4 必须为 v-for 设置键值 key
+
+v-for指令和v-if不允许绑定在同一个元素上，如果需要在computed里面对数据进行处理。
+
+### 1.5 script 标签内部结构顺序
+
+```vue
+<template>
+    <div class=""></div>
+</template>
+
+<script>
+
+export default {
+    components: {},
+    data() {
+        return {
+
+        };
+    },
+    computed: {},
+    watch: {},
+    methods: {},
+    created() {},
+    mounted() {},
+    beforeCreate() {},
+    beforeMount() {},
+    beforeUpdate() {},
+    updated() {},
+    beforeDestroy() {},
+    destroyed() {},
+    activated() {},
+    }
+</script>
+<style lang='less' scoped>
+//@import url(); 引入公共css类
+
+</style>
+```
+
+### 1.6 Vue Router 规范
+
+1) 页面跳转数据传递使用路由参数
+
+页面跳转，例如 A 页面跳转到 B 页面，需要将 A 页面的数据传递到 B 页面，推荐使用路由参数进行传参，而不是将需要传递的数据保存 vuex，然后在 B 页面取出 vuex的数据，因为如果在 B 页面刷新会导致 vuex 数据丢失，导致 B 页面无法正常显示数据。
+
+```js
+// 正确示例：
+let id = ' 123';
+this.$router.push({ name: 'userCenter', query: { id: id } });
+```
+
+2) router 中的命名规范
+
+path、childrenPoints命名规范采用kebab-case命名规范（vue文件的目录结构保持一致，因为目录、文件名都是kebab-case，这样很方便找到对应的文件）【有利于搜索引擎】
+
+name命名规范采用KebabCase命名规范且和component组件名保持一致！（因为要保持keep-alive特性，keep-alive按照component的name进行缓存，所以两者必须高度保持一致）
+
+```js
+// 动态加载
+
+export const reload = [
+    {
+        path: '/reload',
+        name: 'reload',
+        component: Main,
+        meta: {
+            title: '动态加载',
+            icon: 'icon iconfont'
+        },
+        children: [
+            {
+                path: '/reload/smart-reload-list',
+                name: 'SmartReloadList',
+                meta: {
+                    title: 'SmartReload',
+                    childrenPoints: [
+                        {
+                            title: '查询',
+                            name: 'smart-reload-search'
+                        },
+                        {
+                            title: '执行reload',
+                            name: 'smart-reload-update'
+
+                        },
+                        {
+                            title: '查看执行结果',
+                            name: 'smart-reload-result'
+                        }
+                    ]
+                },
+                component: () => import('@/views/reload/smart-reload/smart-reload-list.vue')
+            }
+        ]
+    }
+];
+```
+
+
+
+3) router 中的 path 命名规范
+
+path除了采用kebab-case命名规范以外，必须以 / 开头，即使是children里的path也要以 / 开头。
+
+经常有这样的场景：某个页面有问题，要立刻找到这个vue文件，如果不用以/开头，path为parent和children组成的，可能经常需要在router文件里搜索多次才能找到，而如果以/开头，则能立刻搜索到对应的组件
+
+```js
+{
+    path: '/file',
+    name: 'File',
+    component: Main,
+    meta: {
+        title: '文件服务',
+        icon: 'ios-cloud-upload'
+    },
+    children: [
+        {
+            path: '/file/file-list',
+            name: 'FileList',
+            component: () =  > import('@/views/file/file-list.vue')
+        },
+        {
+            path: '/file/file-add',
+            name: 'FileAdd',
+            component: () =  > import('@/views/file/file-add.vue')
+        },
+        {
+            path: '/file/file-update',
+            name: 'FileUpdate',
+            component: () =  > import('@/views/file/file-update.vue')
+        }
+    ]
+}
+```
+
+### 2、Vue 项目目录规范
+
+### 2.1 基础
+
+vue 项目中的所有命名一定要与后端命名统一。
+
+比如权限：后端 privilege, 前端无论 router , store, api 等都必须使用 privielege单词！
+
+### 2.2 目录说明
+
+目录名按照上面的命名规范，其中 components 组件用大写驼峰，其余除 components
+组件目录外的所有目录均使用 kebab-case 命名。
+
+```
+├── public
+│ └── logo.png # LOGO
+│ └── index.html # Vue 入口模板
+├── src
+│ ├── api # Api ajax 等
+│ ├── └── module #业务逻辑api
+│ ├────── index #
+│ ├── assets # 本地静态资源
+│ ├── config # 项目基础配置，包含路由，全局设置
+│ ├── components # 业务通用组件
+│ ├── core # 项目引导, 全局配置初始化，依赖包引入等
+│ ├── router # Vue-Router
+│ ├── store # Vuex
+│ ├── utils # 工具库
+│ ├── locales # 国际化资源
+│ ├── views # 业务页面入口和常用模板
+│ ├────── basic-data #基础数据
+│ ├────── material-management #物资管理
+│ ├────── maintenance-plan #检修计划
+│ ├────── standard-specification #标准规范
+│ ├────── supervision-evaluation #监督评价
+│ ├────── analysis-query #分析查询
+│ ├────── decision-support#决策支持
+│ ├────── my # 我的
+│ ├────── ├── my-index # 我的-首页
+│ ├───────────── └── my-wallet # 我的-钱包
+│ ├────────────────── ├── modules # 页面子组件（非必要）
+│ ├───────────────────└── index.vue # 页面主体
+│ ├── App.vue # Vue 模板入口
+│ └── main.js # Vue 入口 JS
+│ └── permission.js # 路由守卫(路由权限控制)
+│ └── global.less # 全局样式
+├── tests # 测试工具
+├── README.md
+└── package.json
+```
+
+1) api 目录
+
+-   文件、变量命名要与后端保持一致。
+
+-   此目录对应后端 API 接口，按照后端一个 controller 一个 api js
+    文件。若项目较大时，可以按照业务划分子目录，并与后端保持一致。
+
+-   api 中的方法名字要与后端 api url 尽量保持语义高度一致性。
+
+-   对于 api 中的每个方法要添加注释，注释与后端 swagger 文档保持一致。
+
+```js
+// 正确示例：
+
+// 后端 url： EmployeeController.java
+/employee/add
+/employee/delete/{id}
+/employee/update
+
+//前端： employee.js
+
+// 添加员工
+addEmployee: (data) => {
+	return postAxios('/employee/add', data)
+},
+
+// 更新员工信息
+updateEmployee: (data) => {
+	return postAxios('/employee/update', data)
+},
+
+// 删除员工
+deleteEmployee: (employeeId) => {
+	return postAxios('/employee/delete/' + employeeId)
+},
+```
+
+2) components 目录
+
+此目录应按照组件进行目录划分，目录命名为 KebabCase，组件命名规则也为 KebabCase
+
+```
+|components
+|-- error-log
+| |-- index.vue
+| |-- index.less
+|-- markdown-editor
+| |-- index.vue
+| |-- index.js
+|-- kebab-case
+```
+
+3) router 与 store 目录
+
+这两个目录一定要将业务进行拆分，不能放到一个 js 文件里。
+
+router 尽量按照 views 中的结构保持一致
+
+store 按照业务进行拆分不同的 js 文件
+
+### 2.3 单文件模板
+
+```vue
+<template>
+    <div class=""></div>
+</template>
+
+<script>
+
+export default {
+    components: {},
+    data() {
+        return {
+
+        };
+    },
+    computed: {},
+    watch: {},
+    methods: {},
+    created() {},
+    mounted() {},
+    beforeCreate() {},
+    beforeMount() {},
+    beforeUpdate() {},
+    updated() {},
+    beforeDestroy() {},
+    destroyed() {},
+    activated() {},
+    }
+</script>
+<style lang='less' scoped>
+//@import url(); 引入公共css类
+
+</style>
+```
+
+### 2.4 其他
+
+1) 尽量不要手动操作 DOM
+
+因使用 vue 框架，所以在项目开发中尽量使用 vue 的数据驱动更新DOM，尽量（不到万不得已）不要手动操作 DOM，包括：增删改 dom元素、以及更改样式、添加事件等。
+
+2) 删除无用代码
+
+因使用了 git/svn 等代码版本工具，对于无用代码必须及时删除，例如：一些调试的console 语句、无用的弃用功能代码。
+
+3）依赖引入
+
+不要因为一个很小的功能引入巨型依赖，自己可实现的功能可以手动封装，引入依赖若可按需加载使用按需加载的方式，例如echart.js不要整体引入，只需引入自己需要的图表
+
+4）版本管理工具
+
+统一使用yarn替代npm进行版本管理，yarn.lock锁不要轻易删除
+
+
+
+### 附： 函数方法常用的动词
+
+```
+get 获取/set 设置,
+add 增加/remove 删除
+create 创建/destory 移除
+start 启动/stop 停止
+open 打开/close 关闭,
+read 读取/write 写入
+load 载入/save 保存,
+create 创建/destroy 销毁
+begin 开始/end 结束,
+backup 备份/restore 恢复
+import 导入/export 导出,
+split 分割/merge 合并
+inject 注入/extract 提取,
+attach 附着/detach 脱离
+bind 绑定/separate 分离,
+view 查看/browse 浏览
+edit 编辑/modify 修改,
+select 选取/mark 标记
+copy 复制/paste 粘贴,
+undo 撤销/redo 重做
+insert 插入/delete 移除,
+add 加入/append 添加
+clean 清理/clear 清除,
+index 索引/sort 排序
+find 查找/search 搜索,
+increase 增加/decrease 减少
+play 播放/pause 暂停,
+launch 启动/run 运行
+compile 编译/execute 执行,
+debug 调试/trace 跟踪
+observe 观察/listen 监听,
+build 构建/publish 发布
+input 输入/output 输出,
+encode 编码/decode 解码
+encrypt 加密/decrypt 解密,
+compress 压缩/decompress 解压缩
+pack 打包/unpack 解包,
+parse 解析/emit 生成
+connect 连接/disconnect 断开,
+send 发送/receive 接收
+download 下载/upload 上传,
+refresh 刷新/synchronize 同步
+update 更新/revert 复原,
+lock 锁定/unlock 解锁
+check out 签出/check in 签入,
+submit 提交/commit 交付
+push 推/pull 拉,
+expand 展开/collapse 折叠
+begin 起始/end 结束,
+start 开始/finish 完成
+enter 进入/exit 退出,
+abort 放弃/quit 离开
+obsolete 废弃/depreciate 废旧,
+collect 收集/aggregate 聚集
+```
+
+
