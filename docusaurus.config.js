@@ -42,7 +42,7 @@ module.exports = {
             },
           ],
         },
-        {to: 'blog', label: 'Blog', position: 'left'},
+        {to: 'blog', label: '教程', position: 'left'},
         {
           href: 'https://gitlab.superdxp.com/',
           label: 'GitLab',
