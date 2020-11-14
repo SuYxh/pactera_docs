@@ -1,10 +1,10 @@
 ---
 slug: ECMAScript
 title: ECMAScript 6简介
-author: YangXinHao
-author_title: 写Bug月入过万
-author_url: https://ironc.gitee.io/vpreco/
-author_image_url: https://vercel.com/api/www/avatar/e256e4bd18ff181f97a9a6860140929058514dc0?s=204
+author: WangXinYu,YangXinHao
+author_title: 学习使我快乐！
+author_url: https://pactera.ironc.cn/blog/ECMAScript
+author_image_url: http://qn.huat.xyz/content/20201114145000.jpg
 tags: [es6, js]
 ---
 

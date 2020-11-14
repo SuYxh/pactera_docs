@@ -18,7 +18,7 @@ module.exports = {
         {
           to: 'docs/regulation/code',
           // activeBasePath: 'docs',
-          label: '开发规范',
+          label: '规范文档',
           position: 'left',
         },
         {
@@ -42,7 +42,7 @@ module.exports = {
             },
           ],
         },
-        {to: 'blog', label: '教程', position: 'left'},
+        {to: 'blog', label: '前端进阶', position: 'left'},
         {
           href: 'https://gitlab.superdxp.com/',
           label: 'GitLab',
