@@ -1,6 +1,6 @@
 module.exports = {
   someSidebar: {
-    "开发规范": ['regulation/code', 'regulation/git'],
+    "规范文档": ['regulation/code', 'regulation/git'],
     // Features: ['mdx'],
   },
   com:{
