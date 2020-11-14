@@ -8,7 +8,7 @@ module.exports = {
   },
 
   vscode:{
-    "vscode": ['tools/vscode/vscode'],
+    "vscode": ['tools/vscode/vscode','tools/vscode/shortcutkey'],
   },
 
   sourcetree:{
